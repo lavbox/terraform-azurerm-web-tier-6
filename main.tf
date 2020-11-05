@@ -53,9 +53,45 @@ locals {
 
 }
 
-module "tier" {
-  source = "./tier"
-  resource_group = local.resource_group
-  project = local.project
+data "azurerm_resource_group" "rg" {
+  name = local.resource_group.name
+}
+
+module "appserviceplan" {
+  source = "./modules/appserviceplan"
+  location = local.resource_group.regionPrefix
+  resource_group_name = local.resource_group.name
+  project_name = local.project.name
+  tier = local.resource_group.tierPrefix
+  region_prefix = local.resource_group.regionPrefix
+}
+
+module "rediscache" {
+  source = "./modules/rediscache"
+  location = local.resource_group.regionPrefix
+  resource_group_name = local.resource_group.name
+  project_name = local.project.name
+  tier = local.resource_group.tierPrefix
+  region_prefix = local.resource_group.regionPrefix
+}
+
+module "storageaccount" {
+  source = "./modules/storageaccount"
+  location = local.resource_group.regionPrefix
+  resource_group_name = local.resource_group.name
+  project_name = local.project.short_name
+  tier = local.resource_group.tierPrefix
+  region_prefix = local.resource_group.regionPrefix
+}
+
+module "appservice" {
+  source = "./modules/appservice"
+  location = local.resource_group.regionPrefix
+  appserviceplan_id = module.appserviceplan.id
+  resource_group_name = local.resource_group.name
+  project_name = local.project.name
+  tier = local.resource_group.tierPrefix
+  region_prefix = local.resource_group.regionPrefix
   opcos = var.opcos
+  depends_on = [module.appserviceplan, module.rediscache, module.storageaccount]
 }
