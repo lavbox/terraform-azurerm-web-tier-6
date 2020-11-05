@@ -20,6 +20,7 @@ variable "tenant_id" {
 variable "subscription_id" {
   type = string
 }
+
 variable "regionPrefix" {
   type = string
 }
