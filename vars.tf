@@ -1,6 +1,15 @@
 variable "client_secret" {
   type = string
 }
+variable "client_id" {
+  type = string
+}
+variable "tenant_id" {
+  type = string
+}
+variable "subscription_id" {
+  type = string
+}
 
 variable "regionPrefix" {
   type = string
@@ -11,7 +20,7 @@ variable "tierPrefix" {
 }
 
 variable "opcos" {
-  type = list(string)
+  type = set(string)
 }
 
 variable "project_name" {
