@@ -25,7 +25,7 @@ data "azurerm_resource_group" "rg" {
 
 module "appserviceplan" {
   source = "./modules/appserviceplan"
-  location = local.resource_group.regionPrefix
+  location = local.resource_group.region
   resource_group_name = local.resource_group.name
   project_name = local.project.name
   tier = local.resource_group.tierPrefix
@@ -34,7 +34,7 @@ module "appserviceplan" {
 
 module "rediscache" {
   source = "./modules/rediscache"
-  location = local.resource_group.regionPrefix
+  location = local.resource_group.region
   resource_group_name = local.resource_group.name
   project_name = local.project.name
   tier = local.resource_group.tierPrefix
@@ -43,7 +43,7 @@ module "rediscache" {
 
 module "storageaccount" {
   source = "./modules/storageaccount"
-  location = local.resource_group.regionPrefix
+  location = local.resource_group.region
   resource_group_name = local.resource_group.name
   project_name = local.project.short_name
   tier = local.resource_group.tierPrefix
@@ -52,7 +52,7 @@ module "storageaccount" {
 
 module "appservice" {
   source = "./modules/appservice"
-  location = local.resource_group.regionPrefix
+  location = local.resource_group.region
   appserviceplan_id = module.appserviceplan.id
   resource_group_name = local.resource_group.name
   project_name = local.project.name
