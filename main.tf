@@ -17,7 +17,15 @@ variable "tierPrefix" {
 }
 
 variable "opcos" {
-  type = list(string)
+  type = set(string)
+  default =  [
+    "BGE",
+    "COMED",
+    "PECO",
+    "DPL",
+    "ACE",
+    "PEPCO"
+  ]
 }
 
 variable "project_name" {

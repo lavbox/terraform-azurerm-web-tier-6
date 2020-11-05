@@ -6,10 +6,6 @@ variable "tierPrefix" {
   type = string
 }
 
-variable "opcos" {
-  type = set(string)
-}
-
 variable "project_name" {
   type = string
 }
