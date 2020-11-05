@@ -8,19 +8,6 @@ terraform {
   }
 }
 
-variable "client_secret" {
-  type = string
-}
-variable "client_id" {
-  type = string
-}
-variable "tenant_id" {
-  type = string
-}
-variable "subscription_id" {
-  type = string
-}
-
 variable "regionPrefix" {
   type = string
 }
@@ -45,10 +32,6 @@ provider "azurerm" {
   # whilst the `version` attribute is optional, we recommend pinning to a given version of the Provider
   version = "=2.20.0"
   features {}
-  client_id = var.client_id
-  client_secret = var.client_secret
-  tenant_id = var.tenant_id
-  subscription_id = var.subscription_id
 }
 
 locals {
